@@ -135,7 +135,7 @@ export default function Index() {
               <h1 className="text-2xl font-heading font-bold">Сахалин Отдых</h1>
             </div>
             <nav className="hidden md:flex items-center gap-6">
-              <a href="#catalog" className="hover:text-accent transition-colors">Каталог</a>
+              <a href="/catalog" className="hover:text-accent transition-colors">Каталог</a>
               <a href="#about" className="hover:text-accent transition-colors">О Сахалине</a>
               <a href="#contacts" className="hover:text-accent transition-colors">Контакты</a>
             </nav>
@@ -366,36 +366,23 @@ export default function Index() {
           <h2 className="text-4xl font-heading font-bold text-center mb-12">Контакты и поддержка</h2>
           <Card>
             <CardContent className="p-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div>
+              <div className="grid grid-cols-1 gap-8 max-w-md mx-auto">
+                <div className="mx-auto">
                   <h3 className="text-xl font-heading font-semibold mb-4">Свяжитесь с нами</h3>
                   <div className="space-y-4">
                     <div className="flex items-center gap-3">
                       <Icon name="Phone" size={20} className="text-primary" />
-                      <span>+7 (4242) 123-456</span>
+                      <a href="tel:+74242272207" className="hover:text-primary transition-colors">+7 (4242) 27-22-07</a>
                     </div>
                     <div className="flex items-center gap-3">
                       <Icon name="Mail" size={20} className="text-primary" />
-                      <span>info@sakhalin-rest.ru</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <Icon name="MapPin" size={20} className="text-primary" />
-                      <span>г. Южно-Сахалинск, ул. Ленина, 123</span>
+                      <a href="mailto:zdorovtex.gov@ya.ru" className="hover:text-primary transition-colors">zdorovtex.gov@ya.ru</a>
                     </div>
                     <div className="flex items-center gap-3">
                       <Icon name="Clock" size={20} className="text-primary" />
-                      <span>Пн-Вс: 9:00 - 21:00</span>
+                      <span>Пн-Вс: 9:00 - 19:00</span>
                     </div>
                   </div>
-                </div>
-                <div>
-                  <h3 className="text-xl font-heading font-semibold mb-4">Задать вопрос</h3>
-                  <form className="space-y-4">
-                    <Input placeholder="Ваше имя" />
-                    <Input type="email" placeholder="Email" />
-                    <Input placeholder="Вопрос" />
-                    <Button className="w-full">Отправить</Button>
-                  </form>
                 </div>
               </div>
             </CardContent>
@@ -409,7 +396,7 @@ export default function Index() {
             <Icon name="Mountain" size={24} className="text-accent" />
             <p className="text-lg font-heading font-semibold">Сахалин Отдых</p>
           </div>
-          <p className="text-sm opacity-80">© 2024 Все базы отдыха Сахалина на одном сайте</p>
+          <p className="text-sm opacity-80">© 2026 Все базы отдыха Сахалина на одном сайте</p>
         </div>
       </footer>
     </div>
