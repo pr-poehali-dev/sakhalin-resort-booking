@@ -4,6 +4,9 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
+User-agent: Yandex
+Allow: /
+
 User-agent: Twitterbot
 Allow: /
 
@@ -12,3 +15,6 @@ Allow: /
 
 User-agent: *
 Allow: /
+Disallow: /api/
+
+Sitemap: https://sakhalin-resort-booking.poehali.dev/sitemap.xml

@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -148,7 +149,55 @@ export default function Index() {
   });
 
   return (
-    <div className="min-h-screen bg-background">
+    <>
+      <Helmet>
+        <title>База отдыха Сахалин - снять дом посуточно, баня, купель, чан | SAKHTECH</title>
+        <meta name="description" content="Базы отдыха на Сахалине ⭐ Снять базу отдыха с баней, купелью и чаном ⭐ Дома посуточно на Сахалине от 2900₽/ночь ⭐ Отдых на природе в Южно-Сахалинске, Корсакове, Холмске ☎️ +7(4242)27-22-07" />
+        <meta name="keywords" content="база отдыха сахалин, снять базу отдыха, отдых на сахалине, дома посуточно на сахалине, баня сахалин, купели сахалин, чан сахалин, аренда домов сахалин, базы отдыха южно-сахалинск" />
+        <link rel="canonical" href="https://sakhalin-resort-booking.poehali.dev/" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "TouristAttraction",
+            "name": "Базы отдыха Сахалина - SAKHTECH",
+            "description": "Каталог баз отдыха на острове Сахалин с баней, купелью и чаном. Аренда домов посуточно для комфортного отдыха на природе.",
+            "telephone": "+7-4242-27-22-07",
+            "address": {
+              "@type": "PostalAddress",
+              "addressRegion": "Сахалинская область",
+              "addressCountry": "RU"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": "46.9590",
+              "longitude": "142.7386"
+            },
+            "priceRange": "2900-5500 RUB",
+            "url": "https://sakhalin-resort-booking.poehali.dev/",
+            "image": "https://cdn.poehali.dev/projects/91dba930-9b7f-463b-8aa6-d101b9e5ec64/files/og-image-1768111640873.jpg"
+          })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "SAKHTECH - Сахалинские Технологии",
+            "url": "https://sakhalin-resort-booking.poehali.dev/",
+            "logo": "https://cdn.poehali.dev/files/IMG_6733.PNG",
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "telephone": "+7-4242-27-22-07",
+              "contactType": "customer service",
+              "availableLanguage": "Russian"
+            },
+            "sameAs": [
+              "https://t.me/sakhtechturist"
+            ]
+          })}
+        </script>
+      </Helmet>
+      
+      <div className="min-h-screen bg-background">
       <header className="sticky top-0 z-50 bg-primary/95 backdrop-blur text-primary-foreground shadow-md">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
@@ -414,5 +463,6 @@ export default function Index() {
         </div>
       </footer>
     </div>
+    </>
   );
 }

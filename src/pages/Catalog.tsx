@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -222,7 +223,57 @@ export default function Catalog() {
   });
 
   return (
-    <div className="min-h-screen bg-background">
+    <>
+      <Helmet>
+        <title>Каталог баз отдыха на Сахалине - снять дом с баней и купелью | SAKHTECH</title>
+        <meta name="description" content="Полный каталог баз отдыха на Сахалине ⚡ Аренда домов посуточно с баней, чаном и купелью ⚡ Отдых на природе в Южно-Сахалинске, Корсакове, Холмске, Аниве ⭐ Цены от 2900₽" />
+        <meta name="keywords" content="каталог баз отдыха сахалин, снять дом посуточно, аренда коттеджа сахалин, баня на сахалине, чан на сахалине, купель на сахалине, базы отдыха с баней, отдых на природе сахалин" />
+        <link rel="canonical" href="https://sakhalin-resort-booking.poehali.dev/catalog" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "name": "Каталог баз отдыха на Сахалине",
+            "description": "Полный каталог баз отдыха на острове Сахалин с баней, купелью и чаном",
+            "numberOfItems": filteredResorts.length,
+            "itemListElement": filteredResorts.slice(0, 10).map((resort, index) => ({
+              "@type": "ListItem",
+              "position": index + 1,
+              "item": {
+                "@type": "LodgingBusiness",
+                "name": resort.name,
+                "description": resort.fullDescription || resort.description,
+                "address": {
+                  "@type": "PostalAddress",
+                  "addressLocality": resort.location,
+                  "addressRegion": "Сахалинская область",
+                  "addressCountry": "RU"
+                },
+                "geo": {
+                  "@type": "GeoCoordinates",
+                  "latitude": resort.coordinates[0].toString(),
+                  "longitude": resort.coordinates[1].toString()
+                },
+                "priceRange": `${resort.price} RUB`,
+                "aggregateRating": {
+                  "@type": "AggregateRating",
+                  "ratingValue": resort.rating.toString(),
+                  "bestRating": "5",
+                  "worstRating": "1"
+                },
+                "amenityFeature": resort.amenities.map(amenity => ({
+                  "@type": "LocationFeatureSpecification",
+                  "name": amenity
+                })),
+                "image": resort.images[0],
+                "telephone": "+7-4242-27-22-07"
+              }
+            }))
+          })}
+        </script>
+      </Helmet>
+      
+      <div className="min-h-screen bg-background">
       <header className="sticky top-0 z-50 bg-primary/95 backdrop-blur text-primary-foreground shadow-md">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
@@ -540,5 +591,6 @@ export default function Catalog() {
         </div>
       </footer>
     </div>
+    </>
   );
 }
