@@ -214,18 +214,17 @@ export default function Catalog() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <a href="/" className="flex items-center gap-2">
-              <Icon name="Mountain" size={32} className="text-accent" />
-              <h1 className="text-2xl font-heading font-bold">Сахалин Отдых</h1>
+              <img src="https://cdn.poehali.dev/files/IMG_3513.PNG" alt="SAKHTECH" className="h-10" />
             </a>
             <nav className="hidden md:flex items-center gap-6">
               <a href="/catalog" className="hover:text-accent transition-colors">Каталог</a>
               <a href="/#about" className="hover:text-accent transition-colors">О Сахалине</a>
               <a href="/#contacts" className="hover:text-accent transition-colors">Контакты</a>
             </nav>
-            <Button variant="secondary" size="sm">
-              <Icon name="User" size={16} className="mr-2" />
-              Войти
-            </Button>
+            <a href="tel:+74242272207" className="flex items-center gap-2 hover:text-accent transition-colors">
+              <Icon name="Phone" size={18} />
+              <span className="hidden md:inline">+7 (4242) 27-22-07</span>
+            </a>
           </div>
         </div>
       </header>
@@ -470,9 +469,8 @@ export default function Catalog() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             <div>
-              <div className="flex items-center gap-2 mb-4">
-                <Icon name="Mountain" size={28} className="text-accent" />
-                <h3 className="text-xl font-heading font-bold">Сахалин Отдых</h3>
+              <div className="mb-4">
+                <img src="https://cdn.poehali.dev/files/IMG_3513.PNG" alt="SAKHTECH" className="h-8" />
               </div>
               <p className="text-primary-foreground/80">
                 Ваш путеводитель по лучшим базам отдыха Сахалина
