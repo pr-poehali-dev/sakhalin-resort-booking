@@ -214,7 +214,7 @@ export default function Catalog() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <a href="/" className="flex items-center gap-2">
-              <img src="https://cdn.poehali.dev/files/IMG_3513.PNG" alt="SAKHTECH" className="h-10" />
+              <img src="https://cdn.poehali.dev/files/IMG_6733.PNG" alt="SAKHTECH" className="h-12" />
             </a>
             <nav className="hidden md:flex items-center gap-6">
               <a href="/catalog" className="hover:text-accent transition-colors">Каталог</a>
@@ -470,7 +470,7 @@ export default function Catalog() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             <div>
               <div className="mb-4">
-                <img src="https://cdn.poehali.dev/files/IMG_3513.PNG" alt="SAKHTECH" className="h-8" />
+                <img src="https://cdn.poehali.dev/files/IMG_6733.PNG" alt="SAKHTECH" className="h-10" />
               </div>
               <p className="text-primary-foreground/80">
                 Ваш путеводитель по лучшим базам отдыха Сахалина

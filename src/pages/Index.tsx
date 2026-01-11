@@ -131,7 +131,7 @@ export default function Index() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <img src="https://cdn.poehali.dev/files/IMG_3513.PNG" alt="SAKHTECH" className="h-10" />
+              <img src="https://cdn.poehali.dev/files/IMG_6733.PNG" alt="SAKHTECH" className="h-12" />
             </div>
             <nav className="hidden md:flex items-center gap-6">
               <a href="/catalog" className="hover:text-accent transition-colors">Каталог</a>
@@ -392,7 +392,7 @@ export default function Index() {
       <footer className="bg-primary text-primary-foreground py-8 px-4">
         <div className="container mx-auto text-center">
           <div className="flex items-center justify-center mb-4">
-            <img src="https://cdn.poehali.dev/files/IMG_3513.PNG" alt="SAKHTECH" className="h-6" />
+            <img src="https://cdn.poehali.dev/files/IMG_6733.PNG" alt="SAKHTECH" className="h-8" />
           </div>
           <p className="text-sm opacity-80">© 2026 Все базы отдыха Сахалина на одном сайте</p>
         </div>
