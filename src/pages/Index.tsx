@@ -9,6 +9,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import Icon from '@/components/ui/icon';
 import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
+import YandexMap from '@/components/YandexMap';
 
 interface Resort {
   id: number;
@@ -18,8 +19,11 @@ interface Resort {
   location: string;
   amenities: string[];
   image: string;
+  images?: string[];
   rating: number;
   available: boolean;
+  fullDescription?: string;
+  coordinates: [number, number];
 }
 
 const resorts: Resort[] = [
@@ -31,8 +35,11 @@ const resorts: Resort[] = [
     location: 'Южно-Сахалинск, 15 км',
     amenities: ['Wi-Fi', 'Баня', 'Камин', 'Парковка'],
     image: 'https://cdn.poehali.dev/projects/91dba930-9b7f-463b-8aa6-d101b9e5ec64/files/eb36a580-6851-47e2-b57b-1c2cdab1256a.jpg',
+    images: ['https://cdn.poehali.dev/projects/91dba930-9b7f-463b-8aa6-d101b9e5ec64/files/eb36a580-6851-47e2-b57b-1c2cdab1256a.jpg', 'https://cdn.poehali.dev/projects/91dba930-9b7f-463b-8aa6-d101b9e5ec64/files/b8ced7cc-4ccf-4d72-83fb-b374b432e39d.jpg'],
     rating: 4.8,
-    available: true
+    available: true,
+    fullDescription: 'Лесная усадьба предлагает полное погружение в атмосферу уюта и спокойствия.',
+    coordinates: [46.9590, 142.7386]
   },
   {
     id: 2,
@@ -42,8 +49,11 @@ const resorts: Resort[] = [
     location: 'Холмск, 8 км',
     amenities: ['Ресторан', 'Бассейн', 'Сауна', 'Прокат снаряжения'],
     image: 'https://cdn.poehali.dev/projects/91dba930-9b7f-463b-8aa6-d101b9e5ec64/files/b8ced7cc-4ccf-4d72-83fb-b374b432e39d.jpg',
+    images: ['https://cdn.poehali.dev/projects/91dba930-9b7f-463b-8aa6-d101b9e5ec64/files/b8ced7cc-4ccf-4d72-83fb-b374b432e39d.jpg', 'https://cdn.poehali.dev/projects/91dba930-9b7f-463b-8aa6-d101b9e5ec64/files/6ed75f78-da4c-498f-b39e-872e100eb75f.jpg'],
     rating: 4.9,
-    available: true
+    available: true,
+    fullDescription: 'Горный приют расположен на возвышенности с потрясающим видом на горные хребты.',
+    coordinates: [47.0450, 142.0420]
   },
   {
     id: 3,
@@ -53,8 +63,11 @@ const resorts: Resort[] = [
     location: 'Корсаков, побережье',
     amenities: ['Пляж', 'Wi-Fi', 'Барбекю', 'Детская площадка'],
     image: 'https://cdn.poehali.dev/projects/91dba930-9b7f-463b-8aa6-d101b9e5ec64/files/6ed75f78-da4c-498f-b39e-872e100eb75f.jpg',
+    images: ['https://cdn.poehali.dev/projects/91dba930-9b7f-463b-8aa6-d101b9e5ec64/files/6ed75f78-da4c-498f-b39e-872e100eb75f.jpg', 'https://cdn.poehali.dev/projects/91dba930-9b7f-463b-8aa6-d101b9e5ec64/files/eb36a580-6851-47e2-b57b-1c2cdab1256a.jpg'],
     rating: 4.7,
-    available: true
+    available: true,
+    fullDescription: 'Океанский бриз - это уникальная возможность просыпаться под шум морских волн.',
+    coordinates: [46.6347, 142.7760]
   },
   {
     id: 4,
@@ -64,8 +77,11 @@ const resorts: Resort[] = [
     location: 'Анива, 20 км',
     amenities: ['Баня', 'Камин', 'Рыбалка', 'Парковка'],
     image: 'https://cdn.poehali.dev/projects/91dba930-9b7f-463b-8aa6-d101b9e5ec64/files/eb36a580-6851-47e2-b57b-1c2cdab1256a.jpg',
+    images: ['https://cdn.poehali.dev/projects/91dba930-9b7f-463b-8aa6-d101b9e5ec64/files/eb36a580-6851-47e2-b57b-1c2cdab1256a.jpg', 'https://cdn.poehali.dev/projects/91dba930-9b7f-463b-8aa6-d101b9e5ec64/files/b8ced7cc-4ccf-4d72-83fb-b374b432e39d.jpg'],
     rating: 4.6,
-    available: false
+    available: false,
+    fullDescription: 'Таёжный уют - место для тех, кто ищет уединения и тишины.',
+    coordinates: [46.7200, 142.5280]
   },
   {
     id: 5,
@@ -75,8 +91,11 @@ const resorts: Resort[] = [
     location: 'Макаров, 12 км',
     amenities: ['Wi-Fi', 'Ресторан', 'Конюшня', 'Велопрокат'],
     image: 'https://cdn.poehali.dev/projects/91dba930-9b7f-463b-8aa6-d101b9e5ec64/files/b8ced7cc-4ccf-4d72-83fb-b374b432e39d.jpg',
+    images: ['https://cdn.poehali.dev/projects/91dba930-9b7f-463b-8aa6-d101b9e5ec64/files/b8ced7cc-4ccf-4d72-83fb-b374b432e39d.jpg', 'https://cdn.poehali.dev/projects/91dba930-9b7f-463b-8aa6-d101b9e5ec64/files/6ed75f78-da4c-498f-b39e-872e100eb75f.jpg'],
     rating: 4.5,
-    available: true
+    available: true,
+    fullDescription: 'Зелёная долина предлагает экологичный отдых в гармонии с природой.',
+    coordinates: [48.6300, 142.7820]
   },
   {
     id: 6,
@@ -86,8 +105,11 @@ const resorts: Resort[] = [
     location: 'Охинский район',
     amenities: ['Wi-Fi', 'Камин', 'Панорамные окна', 'Парковка'],
     image: 'https://cdn.poehali.dev/projects/91dba930-9b7f-463b-8aa6-d101b9e5ec64/files/6ed75f78-da4c-498f-b39e-872e100eb75f.jpg',
+    images: ['https://cdn.poehali.dev/projects/91dba930-9b7f-463b-8aa6-d101b9e5ec64/files/6ed75f78-da4c-498f-b39e-872e100eb75f.jpg', 'https://cdn.poehali.dev/projects/91dba930-9b7f-463b-8aa6-d101b9e5ec64/files/eb36a580-6851-47e2-b57b-1c2cdab1256a.jpg'],
     rating: 4.9,
-    available: true
+    available: true,
+    fullDescription: 'Северное сияние - это сочетание современного комфорта и красоты природы.',
+    coordinates: [51.6800, 142.9450]
   }
 ];
 
@@ -245,13 +267,7 @@ export default function Index() {
             <div className="mb-8 animate-fade-in">
               <Card>
                 <CardContent className="p-6">
-                  <div className="h-[400px] bg-muted rounded-lg flex items-center justify-center">
-                    <div className="text-center">
-                      <Icon name="MapPin" size={48} className="mx-auto mb-4 text-primary" />
-                      <p className="text-muted-foreground">Интерактивная карта баз отдыха Сахалина</p>
-                      <p className="text-sm text-muted-foreground mt-2">Здесь будет отображена карта с локациями</p>
-                    </div>
-                  </div>
+                  <YandexMap resorts={filteredResorts} />
                 </CardContent>
               </Card>
             </div>

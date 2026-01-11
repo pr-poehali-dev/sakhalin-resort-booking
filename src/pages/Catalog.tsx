@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import Icon from '@/components/ui/icon';
+import YandexMap from '@/components/YandexMap';
 
 interface Resort {
   id: number;
@@ -20,6 +21,7 @@ interface Resort {
   available: boolean;
   fullDescription: string;
   mapEmbed: string;
+  coordinates: [number, number];
 }
 
 const resorts: Resort[] = [
@@ -37,7 +39,8 @@ const resorts: Resort[] = [
     ],
     rating: 4.8,
     available: true,
-    mapEmbed: 'https://yandex.ru/map-widget/v1/?ll=142.750000,46.950000&z=12'
+    mapEmbed: 'https://yandex.ru/map-widget/v1/?ll=142.750000,46.950000&z=12',
+    coordinates: [46.9590, 142.7386]
   },
   {
     id: 2,
@@ -53,7 +56,8 @@ const resorts: Resort[] = [
     ],
     rating: 4.9,
     available: true,
-    mapEmbed: 'https://yandex.ru/map-widget/v1/?ll=142.050000,47.400000&z=12'
+    mapEmbed: 'https://yandex.ru/map-widget/v1/?ll=142.050000,47.400000&z=12',
+    coordinates: [47.0450, 142.0420]
   },
   {
     id: 3,
@@ -69,7 +73,8 @@ const resorts: Resort[] = [
     ],
     rating: 4.7,
     available: true,
-    mapEmbed: 'https://yandex.ru/map-widget/v1/?ll=142.770000,46.630000&z=12'
+    mapEmbed: 'https://yandex.ru/map-widget/v1/?ll=142.770000,46.630000&z=12',
+    coordinates: [46.6347, 142.7760]
   },
   {
     id: 4,
@@ -85,7 +90,8 @@ const resorts: Resort[] = [
     ],
     rating: 4.6,
     available: true,
-    mapEmbed: 'https://yandex.ru/map-widget/v1/?ll=142.520000,46.720000&z=12'
+    mapEmbed: 'https://yandex.ru/map-widget/v1/?ll=142.520000,46.720000&z=12',
+    coordinates: [46.7200, 142.5280]
   },
   {
     id: 5,
@@ -101,7 +107,8 @@ const resorts: Resort[] = [
     ],
     rating: 4.5,
     available: true,
-    mapEmbed: 'https://yandex.ru/map-widget/v1/?ll=142.780000,48.630000&z=12'
+    mapEmbed: 'https://yandex.ru/map-widget/v1/?ll=142.780000,48.630000&z=12',
+    coordinates: [48.6300, 142.7820]
   },
   {
     id: 6,
@@ -117,7 +124,8 @@ const resorts: Resort[] = [
     ],
     rating: 4.9,
     available: true,
-    mapEmbed: 'https://yandex.ru/map-widget/v1/?ll=142.940000,51.680000&z=12'
+    mapEmbed: 'https://yandex.ru/map-widget/v1/?ll=142.940000,51.680000&z=12',
+    coordinates: [51.6800, 142.9450]
   },
   {
     id: 7,
@@ -133,7 +141,8 @@ const resorts: Resort[] = [
     ],
     rating: 4.4,
     available: true,
-    mapEmbed: 'https://yandex.ru/map-widget/v1/?ll=142.670000,50.850000&z=12'
+    mapEmbed: 'https://yandex.ru/map-widget/v1/?ll=142.670000,50.850000&z=12',
+    coordinates: [50.8500, 142.6700]
   },
   {
     id: 8,
@@ -149,7 +158,8 @@ const resorts: Resort[] = [
     ],
     rating: 4.8,
     available: true,
-    mapEmbed: 'https://yandex.ru/map-widget/v1/?ll=142.750000,46.990000&z=12'
+    mapEmbed: 'https://yandex.ru/map-widget/v1/?ll=142.750000,46.990000&z=12',
+    coordinates: [46.9900, 142.7500]
   },
   {
     id: 9,
@@ -165,7 +175,8 @@ const resorts: Resort[] = [
     ],
     rating: 4.6,
     available: true,
-    mapEmbed: 'https://yandex.ru/map-widget/v1/?ll=142.790000,47.330000&z=12'
+    mapEmbed: 'https://yandex.ru/map-widget/v1/?ll=142.790000,47.330000&z=12',
+    coordinates: [47.3300, 142.7900]
   },
   {
     id: 10,
@@ -181,7 +192,8 @@ const resorts: Resort[] = [
     ],
     rating: 5.0,
     available: true,
-    mapEmbed: 'https://yandex.ru/map-widget/v1/?ll=141.870000,46.650000&z=12'
+    mapEmbed: 'https://yandex.ru/map-widget/v1/?ll=141.870000,46.650000&z=12',
+    coordinates: [46.7000, 143.0000]
   }
 ];
 
@@ -191,6 +203,7 @@ export default function Catalog() {
   const [selectedLocation, setSelectedLocation] = useState('all');
   const [selectedResort, setSelectedResort] = useState<Resort | null>(null);
   const [showBooking, setShowBooking] = useState(false);
+  const [showMap, setShowMap] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   const filteredResorts = resorts.filter(resort => {
@@ -278,7 +291,27 @@ export default function Catalog() {
                 </Select>
               </div>
             </div>
+            
+            <div className="mt-4 flex justify-end">
+              <Button
+                variant="outline"
+                onClick={() => setShowMap(!showMap)}
+              >
+                <Icon name="Map" size={16} className="mr-2" />
+                {showMap ? 'Скрыть карту' : 'Показать на карте'}
+              </Button>
+            </div>
           </div>
+
+          {showMap && (
+            <div className="mb-8 animate-fade-in">
+              <Card>
+                <CardContent className="p-6">
+                  <YandexMap resorts={filteredResorts} />
+                </CardContent>
+              </Card>
+            </div>
+          )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredResorts.map((resort) => (
