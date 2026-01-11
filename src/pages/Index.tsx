@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -98,6 +98,17 @@ export default function Index() {
   const [dateFrom, setDateFrom] = useState<Date>();
   const [dateTo, setDateTo] = useState<Date>();
   const [showMap, setShowMap] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  const scrollToCatalog = () => {
+    const catalogSection = document.getElementById('catalog');
+    if (catalogSection) {
+      catalogSection.scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => {
+        searchInputRef.current?.focus();
+      }, 500);
+    }
+  };
 
   const filteredResorts = resorts.filter(resort => {
     const matchesSearch = resort.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -144,7 +155,7 @@ export default function Index() {
           <p className="text-xl md:text-2xl mb-8 max-w-2xl animate-fade-in">
             Откройте для себя первозданную красоту острова. Комфортный отдых на природе.
           </p>
-          <Button size="lg" className="animate-scale-in bg-secondary hover:bg-secondary/90 text-white">
+          <Button size="lg" className="animate-scale-in bg-secondary hover:bg-secondary/90 text-white" onClick={scrollToCatalog}>
             <Icon name="Search" size={20} className="mr-2" />
             Найти базу отдыха
           </Button>
@@ -160,6 +171,7 @@ export default function Index() {
               <div>
                 <label className="text-sm font-medium mb-2 block">Поиск</label>
                 <Input
+                  ref={searchInputRef}
                   placeholder="Название или описание..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
